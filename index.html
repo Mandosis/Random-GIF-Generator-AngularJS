@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="gifD">
   <head lang="en">
     <meta charset="utf-8">
     <title>gifD</title>
-    <script src="jquery-2.2.2.min.js"></script>
+    <script src="angular.min.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body ng-controller="GifController">
     <header>
       <h1 class="logo">gifD</h1>
       <section class="search">
-        <input type="search" placeholder="Random"/>
-        <button>Get gifd</button>
+        <input type="search" ng-model="search" placeholder="Random"/>
+        <button ng-click="getGif(search)">Get gifd</button>
       </section>
     </header>
     <section class="gifs">
-
+      <div ng-repeat="gif in searchData track by $index" ng-show="!showRandom">
+        <img ng-src="{{gif.images.fixed_height.url}}"  />
+      </div>
+      <img ng-src="{{searchData.fixed_height_downsampled_url}}" ng-show="showRandom" />
     </section>
   </body>
 </html>
